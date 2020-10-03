@@ -3,12 +3,11 @@ const CustomError = require("../extensions/custom-error");
 module.exports = function getSeason(data) {
   //throw new CustomError('Not implemented');
   // remove line with error and write your code here
-  let d = data.getMonth() + 1;  
-  let a = new Date(2150, 12, 21, 18, 36, 41, 841)
-  if (d == null) {
-    return null;
+  
+  if (typeof data == "undefined") {
+    return 'Unable to determine the time of year!';
   } else {
-
+    let d = data.getMonth() + 1;
   if (d < 3) {
     return 'winter';
     }
@@ -18,11 +17,13 @@ module.exports = function getSeason(data) {
     if (d < 9) {
     return 'summer';
     }
-    if (d < 11) {
-    return 'autumn';
+    if (d < 12) {
+    return /autumn|fall/;
     }
     if ( d = 12) {
     return 'winter';
     }
+
   }
+
 };
