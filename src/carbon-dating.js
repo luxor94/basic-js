@@ -12,3 +12,4 @@ if (sampleActivity !== typeof(number)) {
  t = 0.693 / k;
  return t * MODERN_ACTIVITY;
 };
+

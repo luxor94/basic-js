@@ -1,33 +1,53 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform(arr) {
-  //throw new CustomError('Not implemented');
-  // remove line with error and write your code here
-  //let a = arr.indexOf('--discard-next', 0);
-  // if (a == -1) {
-  //  return arr
-  //  } else { arr.splice(a, a-1) 
- //   };
-    let b = arr.indexOf('--discard-prev', 0);
-    if (b == -1) {
-      arr
-      } else if ( b == 0 ) {
-        arr.shift()
-        } else { arr.splice(b-1, b-1)
-      };
-      let c = arr.indexOf('--double-next', 0);
-      if (c == -1) {
-    return arr
-    } else {
-     arr.splice(c, c-2, arr[c+1])
-    };
-let d = arr.indexOf('--double-prev', 0);
-   if (d == -1) {
-    return arr
-    } else if ( d == 0 ) {
-      arr.shift()
-    } else {
-    arr.splice(d, d-2, arr[d-1])
-    };
-  return arr;
+  if (!Array.isArray(arr)) throw new Error ('Error if arr is not an Array');
+  if (arr.length == 0) return [];
+      const a = arr.indexOf('--discard-next');
+      const b = arr.indexOf('--discard-prev');
+      const c = arr.indexOf('--double-next');
+      const d = arr.indexOf('--double-prev')
+      if (a !== -1) {
+        if (a == 0) {
+          return arr.slice(a+1);
+        } 
+        else if (a == arr.length-1) {
+          return arr.slice(0,a)
+        } else {
+          return (arr.slice(0,a) + ',' + arr.slice(-a+2)).split(',')
+        }
+        
+      }
+      
+      if (b !== -1) {
+        if (b == 0) {
+          return arr.slice(b+1);
+        } else if (b == arr.length-1) {
+          return arr.slice(0,b)
+        } else {
+          return (arr.slice(0,a-1) + ',' + arr.slice(-a+1)).split(',')
+      }
+    }
+
+      if (c !== -1) {
+        if (c == 0) {
+          return arr.slice(c+1);
+        } else if (c == arr.length-1) {
+          return arr.slice(0,c)
+        } else {
+          return (arr.slice(0,c) + ',' + arr[c+1] + ',' + arr.slice(-c+1)).split(',')
+        }
+      }
+
+      if (d !== -1) {
+        if (d == 0) {
+          return arr.slice(d+1);
+        } else if (d == arr.length-1) {
+          return arr.slice(0,d)
+        } else {
+          return (arr.slice(0,d) + ',' + arr[d-1] + ',' + arr.slice(-d+1)).split(',')
+        }
+        
+      }
+      return arr;
 };

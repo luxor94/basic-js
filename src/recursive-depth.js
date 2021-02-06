@@ -4,11 +4,17 @@ module.exports = class DepthCalculator {
   calculateDepth(arr) {
     //throw new CustomError('Not implemented');
     // remove line with error and write your code here
-    for (i = 0; i < arr.length; i++) {
-      let sum = 0
-      if ( arr[i] == Object) {
-        return sum += 1
-      }
-    }
-  }
+    if (arr.some(item => 'object') === false) {
+    
+      return 1
+    } else {
+       arr.reduce(
+       (result, element) => result.concat(element),
+       []
+     );
+     let sum = 0+1
+       return sum;
+    };
+   
+  };
 };
